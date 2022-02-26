@@ -2,7 +2,7 @@ package test;
 
 import java.util.ArrayList;
 
-public class NumberList<T extends Number> implements Operations<T> {
+public class NumberList<T extends Number, E extends ArrayList> implements Operations<T,E> {
 	
 	/* Store numbers ArrayList */
 	private ArrayList<T> numbers;
@@ -61,19 +61,89 @@ public class NumberList<T extends Number> implements Operations<T> {
 	}
 
 	@Override
-	public T maxValue(T collection) {
+	public T maxValue(E collection) {
 		
+		/*
+		   * After instantiating an object of NumberList with the numbers that will constitute the ArrayList, access this method by writing the name of the object, 
+		   * plus a dot, and the name of this method while passing in an argument, the collection that you want to check its maximum value (in this case, the ArrayList).
+		   * In the main method, we retrieve this ArrayList by using the getNumbers() method, which retrieves the numbers attribute that holds the ArrayList.
+		   * This should return the maximum value from our ArrayList.
+		   *
+		   * @param collection - You have to pass in the collection from an specific object to retrieve its ArrayList. 
+		   * @return You return the maximum value from our ArrayList.
+		   * @throws RuntimeException
+		 */
 		
+		// Retrieve the first element from the ArrayList
+		T maxObj = (T) collection.get(0);
 		
-		return null;
+		// Store the first element from the ArrayList into a double variable
+		double max = maxObj.doubleValue();
+		
+		// Get the total number of elements in the ArrayList
+		int numberLength = collection.size();
+		
+		// Iterate through all of the elements from the ArrayList
+		for(int i = 1; i < numberLength; i++) {
+			// Get the current object from the ArrayList depending on the current step of the For loop
+			T currentObj = (T) collection.get(i);
+			// Store the value into a double variable
+			double current = currentObj.doubleValue();
+			// Check whether the current value is greater than the value stored in the current maximum found value.
+			if(current > max) {
+				// Store the value into the maxObj object
+				maxObj = (T) collection.get(i);
+				max = maxObj.doubleValue();
+			}
+		}
+		
+		Double result = Double.valueOf(max);
+		
+		// Return the maximum value from the ArrayList
+		return (T) result;
 	}
 
 	@Override
-	public T minValue(T collection) {
+	public T minValue(E collection) {
 		
+		/*
+		   * After instantiating an object of NumberList with the numbers that will constitute the ArrayList, access this method by writing the name of the object, 
+		   * plus a dot, and the name of this method while passing in an argument, the collection that you want to check its minimum value (in this case, the ArrayList).
+		   * In the main method, we retrieve this ArrayList by using the getNumbers() method, which retrieves the numbers attribute that holds the ArrayList.
+		   * This should return the minimum value from our ArrayList.
+		   *
+		   * @param collection - You have to pass in the collection from an specific object to retrieve its ArrayList. 
+		   * @return You return the minimum value from our ArrayList.
+		   * @throws RuntimeException
+		 */
 		
+		// Retrieve the first element from the ArrayList
+		T minObj = (T) collection.get(0);
 		
-		return null;
+		// Store the first element from the ArrayList into a double variable
+		double min = minObj.doubleValue();
+		
+		// Get the total number of elements in the ArrayList
+		int numberLength = collection.size();
+		
+		// Iterate through all of the elements from the ArrayList
+		for(int i = 1; i < numberLength; i++) {
+			// Get the current object from the ArrayList depending on the current step of the For loop
+			T currentObj = (T) collection.get(i);
+			// Store the value into a double variable
+			double current = currentObj.doubleValue();
+			// Check whether the current value is less than the value stored in the current minimum found value.
+			if(current < min) {
+				// Store the value into the minObj object
+				minObj = (T) collection.get(i);
+				min = minObj.doubleValue();
+			}
+		}
+		
+		Double result = Double.valueOf(min);
+		
+		// Return the minimum value from the ArrayList
+		return (T) result;
 	}
 
 	@Override
@@ -103,6 +173,20 @@ public class NumberList<T extends Number> implements Operations<T> {
 		return (T) resultObj;
 	}
 	
+	public double factorial(int index) {
+		
+		T numberObj = numbers.get(index);
+		double number = numberObj.doubleValue();
+		
+		double result = 1;
+		
+		for(double i = number; i>=1; i--) {
+			result = result * i;
+		}
+		
+		return result;
+	}
+	
 	public void addNumber(T number) {
 		/*
 		   * After instantiating an object of NumberList with the numbers that will constitute the ArrayList, access this method by writing the name of the object, 
@@ -129,7 +213,7 @@ public class NumberList<T extends Number> implements Operations<T> {
 		 */
 		
 		for(int i = 0; i < numbers.size(); i++) {
-			System.out.println(numbers.get(i));
+			System.out.println("Index " + i + ": " + numbers.get(i));
 		}
 	}
 
