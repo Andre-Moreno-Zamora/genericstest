@@ -9,7 +9,17 @@ public class NumberList<T extends Number, E extends ArrayList> implements Operat
 	
 	/* Constructor */
 	public NumberList(T number1, T number2, T number3, T number4) {
-		//
+		/*
+		   * When you are instantiating a NumberList object, you have to specify the type of values that it will use
+		   * it is important to define an ArrayList as the second type of value inside the diamond operator (e.g. NumberList<Integer, ArrayList>)
+		   * As the arguments for the constructor, you have to pass in 4 numbers, they will be stored as elements in that object's ArrayList
+		   * 
+		   * @param number1 - Declare the first element in the ArrayList
+		   * 		number2 - Declare the second element in the ArrayList
+		   * 		number3 - Declare the third element in the ArrayList
+		   * 		number4 - Declare the fourth element in the ArrayList
+		   * @throws RuntimeException
+		 */
 		try {
 			// Create a new ArrayList and store it in numbers attribute
 			this.numbers = new ArrayList<T>();
