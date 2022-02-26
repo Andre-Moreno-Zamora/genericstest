@@ -89,7 +89,7 @@ public class NumberList<T extends Number, E extends ArrayList> implements Operat
 			T currentObj = (T) collection.get(i);
 			// Store the value into a double variable
 			double current = currentObj.doubleValue();
-			// Check whether the current value is greater than the value stored in the current maximum found value.
+			// Check whether the current value is greater than the value stored in the current maximum found value
 			if(current > max) {
 				// Store the value into the maxObj object
 				maxObj = (T) collection.get(i);
@@ -132,7 +132,7 @@ public class NumberList<T extends Number, E extends ArrayList> implements Operat
 			T currentObj = (T) collection.get(i);
 			// Store the value into a double variable
 			double current = currentObj.doubleValue();
-			// Check whether the current value is less than the value stored in the current minimum found value.
+			// Check whether the current value is less than the value stored in the current minimum found value
 			if(current < min) {
 				// Store the value into the minObj object
 				minObj = (T) collection.get(i);
@@ -175,16 +175,86 @@ public class NumberList<T extends Number, E extends ArrayList> implements Operat
 	
 	public double factorial(int index) {
 		
+		/*
+		   * After instantiating an object of NumberList with the numbers that will constitute the ArrayList, access this method by writing the name of the object, 
+		   * plus a dot, and the name of this method while passing in as an argument the desired index from the ArrayList that you want to factorial.
+		   * This should return the result of the factorial.
+		   *
+		   * @param index - You have to pass in an integer to retrieve the number that you want to factorial from the ArrayList. 
+		   * @return You return the factorial of the number retrieved by the index that was passed in.
+		   * @throws RuntimeException
+		 */
+		
+		// Get the number for the operation
 		T numberObj = numbers.get(index);
+		// Store that number into a double variable
 		double number = numberObj.doubleValue();
 		
+		// Initialize the result variable
 		double result = 1;
 		
-		for(double i = number; i>=1; i--) {
+		// Through a For loop, get all numbers from 1 to the specified number and multiply all of them at each step
+		for(double i = number; i >= 1; i--) {
 			result = result * i;
 		}
 		
+		// Return the factorial
 		return result;
+	}
+	
+	public ArrayList<Integer> findPrimes(E collection) {
+		
+		/*
+		   * After instantiating an object of NumberList with the numbers that will constitute the ArrayList, access this method by writing the name of the object, 
+		   * plus a dot, and the name of this method while passing in an argument the collection from whom you want to check which elements are prime numbers. (in this case, the ArrayList).
+		   * In the main method, we retrieve this ArrayList by using the getNumbers() method, which retrieves the numbers attribute that holds the ArrayList.
+		   * This should return an ArrayList that consists of the prime numbers that are present in our original ArrayList.
+		   *
+		   * @param collection - You have to pass in the collection from an specific object to retrieve its ArrayList. 
+		   * @return You return an ArrayList that lists the elements from the original collection that are prime numbers.
+		   * @throws RuntimeException
+		 */
+		
+		// Declare a new ArrayList that will store the list of prime numbers
+		ArrayList<Integer> primes = new ArrayList<Integer>();
+		
+		// Get the total number of elements that exist in the object's original ArrayList
+		int numberLength = collection.size();
+		
+		// Loop through all of the elements inside the original ArrayList
+		for(int n = 0; n < numberLength; n++) {
+			
+			// Initialize our counter at 2 since 1 is a multiple of any number
+			int i = 2;
+			// Initialize our prime flag variable
+			boolean prime = true;
+			
+			// Get the current step's index to retrieve a value to loop and evaluate if it has more than one multiple
+			T currentObj = (T) collection.get(n);
+			// Save the current value inside a double variable
+			int current = currentObj.intValue();
+			
+			// Use a while loop to look for all of the multiples from the current value
+			// We go just half-way through the number because if it can be multiplied by 2, then it already has more than 2 multiples (1 and itself)
+			while (i <= current/2) {
+				// Check if the current step of the while loop is a multiple of the current original ArrayList number
+				if(current % i == 0) {
+					prime = false;
+					// If we have found one additional multiple, then flag this number as a non-prime and break the loop
+					break;
+				}
+				i++;
+			}
+			
+			// If there was no multiples found apart from 1 and the number itself, then add it to the primes ArrayList
+			if(prime) {
+				primes.add(current);
+			}
+		}
+		
+		// Return the ArrayList that contains all of the prime numbers from the original ArrayList
+		return primes;
+		
 	}
 	
 	public void addNumber(T number) {
@@ -201,20 +271,6 @@ public class NumberList<T extends Number, E extends ArrayList> implements Operat
 			System.out.println(e.getMessage());
 		}
 		
-	}
-
-	public void displayList() {
-		
-		/*
-		   * After instantiating an object of NumberList with the numbers that will constitute the ArrayList, access this method by writing the name of the object, 
-		   * plus a dot, and the name of this method. This will print in the console all of the contents from the ArrayList.
-		   *
-		   * @throws RuntimeException
-		 */
-		
-		for(int i = 0; i < numbers.size(); i++) {
-			System.out.println("Index " + i + ": " + numbers.get(i));
-		}
 	}
 
 }
